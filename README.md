@@ -12,7 +12,7 @@ This project outputs json log and doesn't record icmp & ipv6 flows by default.
 
 To add flowN to the standard local configuration of zeek, edit `<zeekscriptdir>/site/local.zeek` and add
 
-    @load flowmeter
+    @load flowN
 
 ### Disable Zeek packet checksum verfication
 
