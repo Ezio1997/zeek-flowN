@@ -14,7 +14,7 @@ To add flowN to the standard local configuration of zeek, edit `<zeekscriptdir>/
 
     @load flowN
 
-### Disable Zeek packet checksum verfication
+### Disable Zeek packet checksum verification
 
 Zeek discards packages with an invalid checksum by default.If users need to include invalid packages in the analysis, you need to add the line `redef ignore_checksums=T;` to the config file. If you start Zeek using command line, use option `-C` to ignore invalid checksum.
 
