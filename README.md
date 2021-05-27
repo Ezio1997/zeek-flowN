@@ -43,3 +43,15 @@ Analyze a `pcap` with a local defined flowN, as defined in `local.zeek` config.
 Analyze read-time traffic only using flowN from the command line and save flowN.log in current directory.Use `-b` option to run Zeek in bare-mode(don't load scripts from the base/directory).
 
     zeek -i <your interface> flowN.zeek -b
+
+## flowN.log
+
+| Feature Name  |  Description  | Example   |
+|   :----       |   :----       | :----     |
+|  uid  |   The ID of the flow as given by Zeek. |   CfC5xZ3RWbb4TJG6i3  |
+|   topN    |   The first N packets of the flow.    |   [460,-374,445,-252,-105,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]    |
+|   proto  |   The 4 layer protocol of the flow.   | tcp   |
+|  orig_h  |    Original host of the flow.  |   192.168.0.1 |
+|   orig_p  |   Original port of the flow.  | 52022 |
+|   resp_h  |   Response host of the flow.  |   8.8.8.8  |
+|   resp_p  |   Response port of the flow.  |   80  |
