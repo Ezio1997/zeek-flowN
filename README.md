@@ -32,6 +32,8 @@ Zeek discards packages with an invalid checksum by default.If users need to incl
 
 * `skipping`: Whether to skipping flows which have no layer-4 payload at all.The default value is T.
 
+* `disable_conn_log`: Whether to disable the conn.log.The default value is T.
+
 ## Run
 
 Analyze a `pcap` with flowN from the command line.

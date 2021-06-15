@@ -33,11 +33,18 @@ global packet_N: table[string] of vector of int;
 
 # 定义是否略过没有负载的流
 const skipping = T;
+# 定义是否将conn.log写入磁盘，增加系统处理速度
+const disable_conn_log = T;
 # 定义是否以json格式输出
 redef LogAscii::use_json = T;
 
 event zeek_init() &priority=5{
     Log::create_stream(FlowN::LOG, [$columns=Features, $path="flowN"]);
+}
+
+event zeek_init(){
+    if(disable_conn_log)
+        Log::disable_stream(Conn::LOG);
 }
 
 # update the measures for each new packet
