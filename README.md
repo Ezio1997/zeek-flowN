@@ -26,9 +26,11 @@ Zeek discards packages with an invalid checksum by default.If users need to incl
 
 * `no_ip6`: Whether to record IPv6 traffic.The default value is T.
 
-* `padding`: Whether to pad the topN sequence to the specified length N.The default value is T.
+* `padding`: Whether to pad the topN sequence to the specified length N.The default value is F.
 
 * `LogAscii::use_json`: Whether to write log using json.The default value is T.If it's F, flowN will output log with ASCII format.
+
+* `skipping`: Whether to skipping flows which have no layer-4 payload at all.The default value is T.
 
 ## Run
 
@@ -40,7 +42,7 @@ Analyze a `pcap` with a local defined flowN, as defined in `local.zeek` config.
 
     zeek local -r <your.pcap>
 
-Analyze read-time traffic only using flowN from the command line and save flowN.log in current directory.Use `-b` option to run Zeek in bare-mode(don't load scripts from the base/directory).
+Analyze real-time traffic only using flowN from the command line and save flowN.log in current directory.Use `-b` option to run Zeek in bare-mode(don't load scripts from the base/directory).Then zeek will only generates flowN.log and conn.log(conn.log is the base log to generate flowN.log).
 
     zeek -i <your interface> flowN.zeek -b
 

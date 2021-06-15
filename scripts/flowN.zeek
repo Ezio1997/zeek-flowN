@@ -1,3 +1,5 @@
+@load base/protocols/conn	# 在bare mode运行时必须预先读取conn.log，其余日志都可以屏蔽掉。需要其他日志时可注释该行并在命令行取消-b选项
+
 module FlowN;
 
 export{
@@ -24,11 +26,13 @@ const no_icmp: bool = T;
 # 定义是否记录ipv6流
 const no_ip6: bool = T;
 # 定义是否填充流长度至N
-const padding:bool = T;
+const padding:bool = F;
 # 映射到对应记录的哈希表
 global packet_N: table[string] of vector of int;
 # 其它记录在触发 connection_remove事件时会从connection中获取
 
+# 定义是否略过没有负载的流
+const skipping = T;
 # 定义是否以json格式输出
 redef LogAscii::use_json = T;
 
@@ -99,6 +103,11 @@ event connection_state_remove(c:connection){
 		break;
 
     local len = |packet_N[c$uid]|;
+    
+    # 略过没有负载的流
+    if(len == 0 && skipping)
+        break;
+
     if(len < N && padding){
         while(len <= N){
             packet_N[c$uid] += 0;
