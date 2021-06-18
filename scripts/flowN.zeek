@@ -9,13 +9,15 @@ export{
     # define a record to saved the features
     type Features: record{
         uid:         string &log;            # conn记录的uid，用于匹配记录
-        topN:       vector of int &log;     # 前N个负载包的包长序列
-        pkt_tot:     count &optional;        # vector中已经记录包的个数，超出则放弃检测当前包，考虑使用|topN|代替
-        proto:       transport_proto   &log; # 流协议
-        orig_h:      addr   &log;            # 源地址
-        orig_p:      port   &log;            # 源目的端口
-        resp_h:      addr   &log;            # 响应地址
-        resp_p:      port   &log;            # 响应端口
+        SeqPaylaod:  vector of int &log;     # 前N个负载包的包长序列
+        # pkt_tot:     count &optional;        # vector中已经记录包的个数，超出则放弃检测当前包，考虑使用|topN|代替
+        TvStart:     time   &log;            # 流起始时间
+        proID:       transport_proto   &log; # 流协议
+        CliIp:       addr   &log;            # 源地址
+        CliPort:     port   &log;            # 源目的端口
+        SerIp:       addr   &log;            # 响应地址
+        SerPort:     port   &log;            # 响应端口
+
     };
 }
 
@@ -122,9 +124,9 @@ event connection_state_remove(c:connection){
         }
     }
     
-    local rec = FlowN::Features($uid = c$uid, $topN = packet_N[c$uid], $pkt_tot = |packet_N[c$uid]|,
-                                $proto = c$conn$proto, $orig_h = c$id$orig_h, $orig_p = c$id$orig_p,
-                                $resp_h = c$id$resp_h, $resp_p = c$id$resp_p);
+    local rec = FlowN::Features($uid = c$uid, $SeqPaylaod = packet_N[c$uid], # $pkt_tot = |packet_N[c$uid]|,
+                                $TvStart = c$start_time, $proID = c$conn$proto, $CliIp = c$id$orig_h, 
+                                $CliPort = c$id$orig_p, $SerIp = c$id$resp_h, $SerPort = c$id$resp_p);
     
     # delete the table entries of this connection
     delete packet_N[c$uid];

@@ -53,9 +53,10 @@ Analyze real-time traffic only using flowN from the command line and save flowN.
 | Feature Name  |  Description  | Example   |
 |   :----       |   :----       | :----     |
 |  uid  |   The ID of the flow as given by Zeek. |   CfC5xZ3RWbb4TJG6i3  |
-|   topN    |   The first N packets of the flow.    |   [460,-374,445,-252,-105,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]    |
-|   proto  |   The 4 layer protocol of the flow.   | tcp   |
-|  orig_h  |    Original host of the flow.  |   192.168.0.1 |
-|   orig_p  |   Original port of the flow.  | 52022 |
-|   resp_h  |   Response host of the flow.  |   8.8.8.8  |
-|   resp_p  |   Response port of the flow.  |   80  |
+|   SeqPayload    |   The first N packets of the flow.    |   [460,-374,445,-252,-105,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]    |
+|   TvStart |   The start time of the flow. |   1258531221.486539   |
+|   ProID  |   The 4 layer protocol of the flow.(Name is tentative)   | tcp   |
+|   CliIp  |    Original host of the flow.  |   192.168.0.1 |
+|   CliPort  |   Original port of the flow.  | 52022 |
+|   SerIp  |   Response host of the flow.  |   8.8.8.8  |
+|   SerPort  |   Response port of the flow.  |   80  |
