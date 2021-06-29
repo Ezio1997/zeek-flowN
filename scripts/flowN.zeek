@@ -9,7 +9,7 @@ export{
     # define a record to saved the features
     type Features: record{
         uid:         string &log;            # conn记录的uid，用于匹配记录
-        SeqPaylaod:  vector of int &log;     # 前N个负载包的包长序列
+        SeqPayload:  vector of int &log;     # 前N个负载包的包长序列
         # pkt_tot:     count &optional;        # vector中已经记录包的个数，超出则放弃检测当前包，考虑使用|topN|代替
         TvStart:     time   &log;            # 流起始时间
         proID:       transport_proto   &log; # 流协议
@@ -124,7 +124,7 @@ event connection_state_remove(c:connection){
         }
     }
     
-    local rec = FlowN::Features($uid = c$uid, $SeqPaylaod = packet_N[c$uid], # $pkt_tot = |packet_N[c$uid]|,
+    local rec = FlowN::Features($uid = c$uid, $SeqPayload = packet_N[c$uid], # $pkt_tot = |packet_N[c$uid]|,
                                 $TvStart = c$start_time, $proID = c$conn$proto, $CliIp = c$id$orig_h, 
                                 $CliPort = c$id$orig_p, $SerIp = c$id$resp_h, $SerPort = c$id$resp_p);
     
